@@ -7,7 +7,7 @@
 #define STR(x) STR_HELPER(x)
 
 #ifndef DEVICE_NAME
-#define DEVICE_NAME "RS485-WiFi"
+#define DEVICE_NAME "EPEVER-1210an-RS485-WiFi"
 #endif
 #ifndef SW_VERSION
 #define SW_VERSION 0.60

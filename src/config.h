@@ -246,8 +246,8 @@ uint16_t EQChargeVoltValue;
   
   const char* batt_temp_status[] = {
     "Normal",
-    "Over WarnTemp",
-    "Below WarnTemp"
+    "Übertemperatur",
+    "Vorwarnungstemperatur"
   };
 
   uint8_t charger_mode  = 0;
