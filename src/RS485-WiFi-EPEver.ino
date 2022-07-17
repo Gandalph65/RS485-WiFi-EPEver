@@ -71,25 +71,25 @@ void setup(void) {
   uint16_t tab4 = ESPUI.addControl( ControlType::Tab, "Settings 4", "About" );
 
   //  Add Live Data controls
-  SolarVoltage = ESPUI.addControl( ControlType::Label, "Solar Voltage", "0", ControlColor::Emerald, tab1);
-  SolarAmps = ESPUI.addControl( ControlType::Label, "Solar Amps", "0", ControlColor::Emerald, tab1);
-  SolarWattage = ESPUI.addControl( ControlType::Label, "Solar Wattage", "0", ControlColor::Emerald, tab1);
-  BatteryVoltage = ESPUI.addControl( ControlType::Label, "Battery Voltage", "0", ControlColor::Emerald, tab1);
-  BatteryAmps = ESPUI.addControl( ControlType::Label, "Battery Amps", "0", ControlColor::Emerald, tab1);
-  BatteryWattage = ESPUI.addControl( ControlType::Label, "Battery Wattage", "0", ControlColor::Emerald, tab1);
+  SolarVoltage = ESPUI.addControl( ControlType::Label, "Solarpanel Volt", "0", ControlColor::Emerald, tab1);
+  SolarAmps = ESPUI.addControl( ControlType::Label, "Solar Ampere", "0", ControlColor::Emerald, tab1);
+  SolarWattage = ESPUI.addControl( ControlType::Label, "Solar Watt", "0", ControlColor::Emerald, tab1);
+  BatteryVoltage = ESPUI.addControl( ControlType::Label, "Battery Volt", "0", ControlColor::Emerald, tab1);
+  BatteryAmps = ESPUI.addControl( ControlType::Label, "Battery Ladestrom", "0", ControlColor::Emerald, tab1);
+  BatteryWattage = ESPUI.addControl( ControlType::Label, "Batterie Watt", "0", ControlColor::Emerald, tab1);
   LoadVoltage = ESPUI.addControl( ControlType::Label, "Load Voltage", "0", ControlColor::Emerald, tab1);
   LoadAmps = ESPUI.addControl( ControlType::Label, "Load Amps", "0", ControlColor::Emerald, tab1);
   LoadWattage = ESPUI.addControl( ControlType::Label, "Load Wattage", "0", ControlColor::Emerald, tab1);
   BatteryStateOC = ESPUI.addControl( ControlType::Label, "Battery SOC", "0", ControlColor::Emerald, tab1);
-  ChargingStatus = ESPUI.addControl( ControlType::Label, "Charging Status", "0", ControlColor::Emerald, tab1);
-  BatteryStatus = ESPUI.addControl( ControlType::Label, "Battery Status", "4", ControlColor::Emerald, tab1);
-  BatteryTemp = ESPUI.addControl( ControlType::Label, "Battery temperature", "0", ControlColor::Emerald, tab1);
+  ChargingStatus = ESPUI.addControl( ControlType::Label, "Ladestatus Status", "0", ControlColor::Emerald, tab1);
+  BatteryStatus = ESPUI.addControl( ControlType::Label, "Batterie Status", "4", ControlColor::Emerald, tab1);
+  BatteryTemp = ESPUI.addControl( ControlType::Label, "Batterie temperature", "0", ControlColor::Emerald, tab1);
   LoadStatus = ESPUI.addControl( ControlType::Label, "Load Status", "Off", ControlColor::Emerald, tab1);
   DeviceTemp = ESPUI.addControl( ControlType::Label, "Device Temp", "0", ControlColor::Emerald, tab1);
 
   // Add Historical Data Controls
-  Maxinputvolttoday = ESPUI.addControl( ControlType::Label, "Max input voltage today", "0", ControlColor::Emerald, tab2);
-  Mininputvolttoday = ESPUI.addControl( ControlType::Label, "Min input voltage today", "0", ControlColor::Emerald, tab2);
+  Maxinputvolttoday = ESPUI.addControl( ControlType::Label, "Max Volt eingang heute", "0", ControlColor::Emerald, tab2);
+  Mininputvolttoday = ESPUI.addControl( ControlType::Label, " Min Volt eingang heute", "0", ControlColor::Emerald, tab2);
   MaxBatteryvolttoday = ESPUI.addControl( ControlType::Label, "Max battery voltage today", "0", ControlColor::Emerald, tab2);
   MinBatteryvolttoday = ESPUI.addControl( ControlType::Label, "Min battery voltage today", "0", ControlColor::Emerald, tab2);
   ConsumedEnergyToday = ESPUI.addControl( ControlType::Label, "Consumed energy today", "0", ControlColor::Emerald, tab2);

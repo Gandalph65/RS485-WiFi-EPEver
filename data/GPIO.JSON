@@ -1,0 +1,35 @@
+{
+	"ROLLADEN":[
+	{
+	"R1":"Kueche",
+	"I_TWI_H":[0],
+	"I_TWI_R":[8],
+	"O_TWI_H":[16],
+	"O_TWI_R":[24],
+	"RUNTIME":[45000],
+	"ACTIVE_TIMER":"[0,1,3]";
+	},
+	{
+	"R2":"Wohnzimmer vorne",
+	"I_TWI_H":[2],
+	"I_TWI_R":[9],
+	"O_TWI_H":[17],
+	"O_TWI_R":[25],
+	"RUNTIME":[55000],
+	"ACTIVE_TIMER":"[0,1,3]";
+	},
+
+	]
+}
+{
+	"TIMER":[
+	"T1":"Timer 1"
+	"UP":[0745],
+	"DOWN":[2115],
+	"DAYS":["MO", "DI", "MI", "DO", "FR"]
+}
+	
+	
+	
+	
+	

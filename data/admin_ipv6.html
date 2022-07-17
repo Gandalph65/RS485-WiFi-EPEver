@@ -1,0 +1,189 @@
+
+<!DOCTYPE HTML> <!-- For more information visit: https://fipsok.de -->
+<html lang="de">
+  <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<title>ESP8266 Admin mit IPV6 Unterstützung</title>
+	<style>
+	  @media only screen and (max-width: 500px) {
+		.ip {
+		  right: 6em;
+		  position: relative;
+		}
+		aside {
+		  max-width: 50vw;
+		}
+	  }
+	</style>
+	<script>
+	  addEventListener('load', () => {
+		renew_ipv6(), once_ipv6();
+		let output = document.querySelector('#note');
+		let btn = document.querySelectorAll('button');
+		let span = document.querySelectorAll('#right span'); 
+		btn[0].addEventListener('click', () => {
+		  location = '/fs.html';
+		});
+		btn[1].addEventListener('click', () => {
+		  location = '/';
+		});
+		btn[2].addEventListener('click', check.bind(this, document.querySelector('input')));
+		btn[3].addEventListener('click', re.bind(this, 'reconnect_ipv6'));
+		btn[4].addEventListener('click', () => {
+		  if (confirm('Bist du sicher!')) re('restart_ipv6');
+		});
+		async function once_ipv6(val = '',arg) {
+		  try {
+			let resp = await fetch('/admin_ipv6/once_ipv6', { method: 'POST', body: val});
+			let obj = await resp.json();
+			output.innerHTML = '';
+			output.classList.remove('note');
+			document.querySelector('form').reset();
+			if (val.length == 0) myIv = setInterval(renew_ipv6, 1000);
+			if (arg == 'reconnect_ipv6') re(arg);
+			span[3].innerHTML = obj['File'];
+			span[4].innerHTML = obj['Build'];
+			span[5].innerHTML = obj['SketchSize'];
+			span[6].innerHTML = obj['SketcadminhSpace'];
+			span[7].innerHTML = obj['LocalIP'];
+			span[8].innerHTML = obj['IPv6l'] ? obj['IPv6l'] : 'inaktiv';
+			span[9].innerHTML = obj['IPv6g'] ? obj['IPv6g'] : 'inaktiv';
+			span[10].innerHTML = obj['Hostname'];
+			span[11].innerHTML = obj['SSID'];
+			span[12].innerHTML = obj['GatewayIP'];
+			span[13].innerHTML = obj['Channel'];
+			span[14].innerHTML = obj['MacAddress'];
+			span[15].innerHTML = obj['SubnetMask'];
+			span[16].innerHTML = obj['BSSID'];
+			span[17].innerHTML = obj['ClientIP'];
+			span[18].innerHTML = obj['DnsIP'];
+			span[19].innerHTML = obj['ResetReason'];
+			span[20].innerHTML = obj['CpuFreqMHz'] + " MHz";
+			span[21].innerHTML = obj['FreeHeap'];
+			span[22].innerHTML = obj['HeapFrag'] + "%";
+			span[23].innerHTML = obj['ChipSize'];
+			span[24].innerHTML = obj['ChipSpeed'] + " MHz";
+			span[25].innerHTML = obj['ChipMode'];
+			span[26].innerHTML = obj['IdeVersion'].replace(/(\d)(\d)(\d)(\d)/,obj['IdeVersion'][3]!=0 ? '$1.$3.$4' : '$1.$3.');
+			span[27].innerHTML = obj['CoreVersion'].replace(/_/g,'.');
+			span[28].innerHTML = obj['SdkVersion'];
+		  } catch(err) {
+			re();
+		  }
+		}
+		async function renew_ipv6() {
+		  const resp = await fetch('/admin_ipv6/renew_ipv6');
+		  const array = await resp.json();
+		  array.forEach((v, i) => {span[i].innerHTML = v});
+		}
+		function check(inObj) {
+		  !inObj.checkValidity() ? (output.innerHTML = inObj.validationMessage, output.classList.add('note')) : (once_ipv6(inObj.value, 'reconnect_ipv6'));
+		}
+		function re(arg = '') {
+		  clearInterval(myIv);
+		  fetch(arg);
+		  output.classList.add('note');
+		  if (arg == 'restart_ipv6') {
+			output.innerHTML = 'Der Server wird neu gestartet. Die Daten werden in 15 Sekunden neu geladen.';
+			setTimeout(once_ipv6, 15000);
+		  } 
+		  else if (arg == 'reconnect_ipv6'){
+			output.innerHTML = 'Die WiFi Verbindung wird neu gestartet. Daten werden in 10 Sekunden neu geladen.';
+			setTimeout(once_ipv6, 10000);
+		  }
+		  else {
+			output.innerHTML = 'Es ist ein Verbindungfehler aufgetreten. Es wird versucht neu zu verbinden.';
+			setTimeout(once_ipv6, 3000);
+		  }
+		}
+	  });
+	</script>
+  </head>
+  <body>
+	<h1>ESP8266 Admin IPV6 Page</h1>
+	<main>
+	  <aside id="left">
+		<span>Runtime ESP:</span>
+		<span>WiFi RSSI:</span>
+		<span>ADC/VCC:</span>
+		<span>Sketch Name:</span>
+		<span>Sketch Build:</span>
+		<span>SketchSize:</span>
+		<span>FreeSketchSpace:</span>
+		<span>IPv4 Address:</span>
+		<span>Link-Local:</span>
+		<span class="ip">IPv6:</span>
+		<span>Hostname:</span>
+		<span>Connected to:</span>
+		<span>Gateway IP:</span>
+		<span>Channel:</span>
+		<span>MacAddress:</span>
+		<span>SubnetMask:</span>
+		<span>BSSID:</span>
+		<span class="ip">Client IP:</span>
+		<span>DnsIP:</span>
+		<span>Reset Ground:</span>
+		<span>CPU Freq:</span>
+		<span>FreeHeap:</span>
+		<span>Heap Fragmentation:</span>
+		<span>FlashSize:</span>
+		<span>FlashSpeed:</span>
+		<span>FlashMode:</span>
+		<span>Arduino IDE Version:</span>
+		<span>Esp Core Version:</span>
+		<span>SDK Version:</span>
+	  </aside>
+	  <aside id="right">
+		<span>0</span>
+		<div>
+		  <span></span>
+		  dBm
+		</div>
+		<span>0</span>
+		<span>?</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span class="ip">0</span>
+		<span>?</span>
+		<span>?</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span class="ip">0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+		<span>0</span>
+	  </aside>
+	</main>
+	<div>
+	  <button>Filesystem</button>
+	  <button>Startseite</button>
+    </div>
+	<div id="note"></div>
+	<div>
+	  <form>
+		<input placeholder="neuer Hostname" pattern="([A-Za-z0-9-]{1,32})" title="Es dürfen nur Buchstaben (a-z, A-Z), Ziffern (0-9) und Bindestriche (-) enthalten sein. Maximal 32 Zeichen" required>
+		<button type="button">Name Senden</button>
+	  </form>
+	</div>
+	<div>
+	  <button>WiFi Reconnect</button>
+	  <button>ESP Restart</button>
+	</div>
+  </body>
+</html>

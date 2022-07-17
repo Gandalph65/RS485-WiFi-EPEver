@@ -239,9 +239,9 @@ uint16_t EQChargeVoltValue;
 
   const char* batt_volt_status[] = {
     "Normal",
-    "Overvolt",
-    "Low Volt Disconnect",
-    "Fault"
+    "Überspannung",
+    "Unterspannung",
+    "Fehler"
   };
   
   const char* batt_temp_status[] = {

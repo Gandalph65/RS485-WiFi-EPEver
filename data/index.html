@@ -1,0 +1,31 @@
+<!DOCTYPE html> <!-- For more information visit: https://fipsok.de -->
+<html lang="de">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="style.css">
+      <title>New Index</title>
+      <script>
+         window.addEventListener('DOMContentLoaded', function () {
+		   elem = document.querySelector("#LED");
+           elem.addEventListener('click', once.bind(this, '?led_zap='));
+         }, once(''));
+         function once(arg) {
+           fetch('bled' + arg).then(response => {
+             return response.text();
+           }).then(text => {
+             elem.innerHTML = 'LED ' + text;
+             elem.style.backgroundColor = text == 'einschalten' ? '#adff2f' : 'red';
+           });
+         }
+      </script>
+   </head>
+   <body>
+   <div class="button-eg-group">
+    <button type="button" class="button">Küche</button><button type="button" class="button">Wohnz 1</button><button type="button" class="button">Wohnz 2</button><button type="button" class="button">Wohnz 3</button><button type="button" class="button">Schlafzimmer</button><button type="button" class="button">Büro</button><button type="button" class="button">Bad</button><button type="button" class="button">Flur</button><button type="button" class="button">Timer</button><button type="button" class="button">Licht</button><button type="button" class="button">Dateien</button>
+</div>
+   </body>
+	<h2>Onboard Led schalten</h2>
+    <h2>Esp8266 Nodemcu Wemos</h2>
+    <button type="button" id="LED"></button>
+</html>
